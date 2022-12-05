@@ -29,9 +29,9 @@ size_t getInt(char line[], size_t s)
     }
 
     int result = atoi(sub);
-    printf("result = %d\n", result);
+//    printf("result = %d\n", result);
 
-    return 0;
+    return end;
 
 }
 
@@ -41,7 +41,8 @@ int handle_line(char line[])
 
     for (size_t i = 0; i < length; ++i) {
         if(line[i] != 44 && line[i] != 45) {
-            i = getInt(line, i);
+            i = getInt(line, i)+1;
+            printf("%zu\n", i);
         }
     }
 
