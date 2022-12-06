@@ -45,11 +45,18 @@ size_t getInt(char line[], size_t s)
 }
 
 void calculate_result_for_line(int *score) {
-    if((set[0] <= set[2] && set[1] >= set[3]) || (set[0] >= set[2] && set[1] <= set[3])) {
+    if(set[1] < set[2] || set[0] > set[3]) {
+        //
+    } else {
+        printf("%d - %d, %d - %d\n", set[0], set[1], set[2], set[3]);
         *score += 1;
-        //printf("%d - %d, %d - %d\n", set[0], set[1], set[2], set[3]);
-        //printf("Score: %d\n", *score);
     }
+
+//    if((set[0] <= set[2] && set[1] >= set[3]) || (set[0] >= set[2] && set[1] <= set[3])) {
+//
+//        //printf("%d - %d, %d - %d\n", set[0], set[1], set[2], set[3]);
+//        //printf("Score: %d\n", *score);
+//    }
 }
 void clear_set(void)
 {
