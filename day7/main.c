@@ -9,15 +9,26 @@
 #define FILENAME "../sample.txt"
 //#define FILENAME "../input.txt"
 
+typedef struct Node Node;
+
+struct Node {
+    Node *parent;
+    Node *children;
+    char type;
+    size_t size;
+};
+
+typedef  struct {
+    size_t size;
+    Node nodes[1024];
+} Node_Pool;
+
+static Node_Pool node_pool = {0};
+
 void handle_line(char line[])
 {
-    if(line[0] == '$') {
-        //cd & ls
-        if()
-    }
     printf("%d\n", line[0]);
 }
-
 
 void read_file()
 {
@@ -38,9 +49,28 @@ void read_file()
     fclose(f);
 }
 
+void print_tree(Node_Pool *np)
+{
+    for (int i = 0; i < 2; ++i) {
+        Node *n = &np->nodes[i];
+        printf("%c -> %zu\n", n->type, n->size);
+    }
+};
+
+Node *node_pool_alloc(Node_Pool *np)
+{
+    Node *result = &np->nodes[np->size];
+    np->size += 1;
+    return result;
+}
 
 int main(void)
 {
-    read_file();
+    Node *s1 = node_pool_alloc(&node_pool);
+    s1->type = 'f';
+    s1->size = 512;
+
+    print_tree(&node_pool);
+//    read_file();
     return 0;
 }
