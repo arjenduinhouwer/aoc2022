@@ -51,7 +51,7 @@ void read_file()
 
 void print_tree(Node_Pool *np)
 {
-    for (int i = 0; i < 2; ++i) {
+    for (int i = 0; i < np->size; ++i) {
         Node *n = &np->nodes[i];
         printf("%c -> %zu\n", n->type, n->size);
     }
@@ -67,8 +67,15 @@ Node *node_pool_alloc(Node_Pool *np)
 int main(void)
 {
     Node *s1 = node_pool_alloc(&node_pool);
-    s1->type = 'f';
-    s1->size = 512;
+    s1->type = 'd';
+    s1->size = 0;
+
+    for (int i = 0; i < 3; ++i) {
+        Node *s = node_pool_alloc(&node_pool);
+        s->parent = s1;
+        s->size = 512;
+        s->type = 'f';
+    }
 
     print_tree(&node_pool);
 //    read_file();
